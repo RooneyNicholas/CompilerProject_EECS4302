@@ -1,0 +1,13 @@
+--While loops
+void main(){
+	int32 hello = testFunction(1, 4)
+}
+
+int32 testFunction(int32 param1, int32 param2){
+	int32 result = 10
+	while (param1 < param2){
+		param1 = param1 + 1
+		result = result + 1
+	}
+	return result
+}

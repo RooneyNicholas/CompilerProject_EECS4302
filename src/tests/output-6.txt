@@ -1,0 +1,12 @@
+CALL:[function main0],[]
+WRIT:[declaration ID: first, type: int32, value:[literal Integer: 9]]
+EVAL:[declaration ID: first, type: int32, value:[literal Integer: 9]]
+WRIT:[declaration ID: second, type: int32, value:[literal Integer: 7]]
+EVAL:[declaration ID: second, type: int32, value:[literal Integer: 7]]
+WRIT:[declaration ID: bitAnd, type: int32, value:[[var int32 id=first] & [var int32 id=second]]]
+EVAL:[declaration ID: bitAnd, type: int32, value:[literal Integer: 1]]
+WRIT:[declaration ID: bitOr, type: int32, value:[[var int32 id=first] | [var int32 id=second]]]
+EVAL:[declaration ID: bitOr, type: int32, value:[literal Integer: 15]]
+WRIT:[declaration ID: bitXor, type: int32, value:[[var int32 id=first] ^ [var int32 id=second]]]
+EVAL:[declaration ID: bitXor, type: int32, value:[literal Integer: 14]]
+{[function main0]=[complete, complete, complete, complete, complete]}

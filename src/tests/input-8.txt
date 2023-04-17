@@ -1,0 +1,12 @@
+--arithmetic operations and integer-double type coercion
+void main(){
+	int32 firstInt = 5
+	double firstDouble = firstInt
+	int32 multipliedInt = firstDouble * firstDouble
+	double fraction = firstInt/2.0
+	int32 truncatedFraction = fraction
+	int32 thirdInt = fraction * fraction
+	
+	double addedNumbers = 5 + 7.0
+	double subtractedNumber = 7 - 5.0
+}

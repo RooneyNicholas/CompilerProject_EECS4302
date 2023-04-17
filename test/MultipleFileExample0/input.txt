@@ -1,0 +1,7 @@
+void main(){
+}
+
+double multiply(int32 param1, double param2){
+	double first = param1 * param2
+	return first 
+}

@@ -1,0 +1,22 @@
+--Nested if statements
+void main(){
+	int32 ten = 10
+	double third = testFunction(ten, 20.0)
+}
+
+double testFunction(int32 param1, double param2){
+	double first
+	double second
+	if (param2 <= 10){
+		second = param1 * param2
+		if (1 < 2){
+			double third = 5.0
+		}
+		first = param1 + second
+	}
+	if (param2 > 10){
+		second = param1 * 10
+		first = param1 + second
+	}
+	return first 
+}

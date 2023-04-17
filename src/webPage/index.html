@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Coverage</title>
+<script type="text/javascript" src="scripts/mc.js"></script>
+<!-- <link rel="StyleSheet" href="styles/mc.css" type="text/css" media="screen, print" />  -->
+<!-- had to put styles in the same file due to when outtputed from a jar file it cannot read the css, will have to later do same with script as well! -->
+<style>
+
+.notCovered {
+	padding: 5px;
+	background-color: red;
+}
+
+.covered {
+	padding: 5px;
+	background-color: lime;
+	
+}
+
+.dropView {
+  
+  padding: 15px;
+  width: 100%;
+  text-align: left;
+  background-color: #eee;
+  border: none;
+  transition: 0.4s;
+}
+
+.panel {
+  padding: 15px 18px;
+  /*display: none;*/
+  overflow: hidden;
+}
+
+/* */
+.active, .dropView:hover {
+  background-color: #ccc;
+}
+
+</style>
+</head>
+<body>
+
+<h1> Coverage Page </h1>
+<div id="target">
+
+</div>
+
+<button class="dropView">Input file</button>
+<div class="panel">
+  $inputFile
+</div>
+
+<!--  For now we'll use 1 test file at a time -->
+<button class="dropView">Test file</button>
+<div class="panel">
+  $testFile
+</div>
+
+<button class="dropView">Coverage</button>
+<div class="panel">
+  $coverage
+</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+void main(){
+	int32 first = 7
+	int32 second = first + 20
+	first = second + 30
+	double third = testFunction(first, 5.0)
+}
+
+double testFunction(int32 param1, double param2){
+	double first = param1 * param2
+	return first 
+	first = param1 * param2
+}
+
+double testFunction2(int32 param1, double param2){
+	double first = param1 * param2
+	return first 
+}

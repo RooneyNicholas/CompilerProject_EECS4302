@@ -1,0 +1,10 @@
+CALL:[function main0],[]
+WRIT:[declaration ID: first, type: int32]
+EVAL:[declaration ID: first, type: int32]
+WRIT:[[var int32 id=first] = [literal Integer: 7]]
+EVAL:[[var int32 id=first] = [literal Integer: 7]]
+WRIT:[declaration ID: second, type: int32, value:[[var int32 id=first] + [literal Integer: 20]]]
+EVAL:[declaration ID: second, type: int32, value:[literal Integer: 27]]
+WRIT:[[var int32 id=first] = [[var int32 id=second] + [literal Integer: 30]]]
+EVAL:[[var int32 id=first] = [literal Integer: 57]]
+{[function main0]=[complete, complete, complete, complete]}

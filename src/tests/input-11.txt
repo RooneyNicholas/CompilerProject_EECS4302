@@ -1,0 +1,18 @@
+void main() {
+    print(printFunction())
+    int32 i = 0
+    print(i)
+    int32[2] array = {1, 2}
+    print(array[0])
+    print(array[1])
+    print(1 + 2)
+    print(true)
+    print(1 > 2)
+    print(1 < 2)
+    print(true && false)
+    print(true && true)
+}
+
+int32 printFunction() {
+    return 5
+}

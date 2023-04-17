@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<!-- CSS Bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<title>Coverage</title>
+<!-- JS Bootstrap -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Script below temp not going to work -->
+<script type="text/javascript" src="scripts/mc.js"></script>
+<!-- <link rel="StyleSheet" href="styles/mc.css" type="text/css" media="screen, print" />  -->
+<!-- had to put styles in the same file due to when outtputed from a jar file it cannot read the css, will have to later do same with script as well! -->
+
+
+<style>
+.notCovered {
+	margin: 0px;
+	padding: 2.5px;
+	background-color: #fd5c63;
+}
+
+.covered {
+	margin: 0px;
+	padding: 2.5px;
+	background-color: #32de84;
+}
+
+.someCovered {
+	margin: 0px;
+	padding: 2.5px;
+	background-color: yellow;
+	position: relative;
+}
+
+/*
+.someCovered:before {
+	content: ' \24D8';
+	position: absolute;
+	background-color: transparent;
+	left: -16px;
+}
+*/
+.functionDecl {
+	margin: 0px;
+	padding: 2.5px;
+	background-color: aqua;
+}
+
+.noMargin {
+	margin: 0px;
+	padding: 2.5px;
+}
+
+.noPadding {
+	padding: 0px;
+}
+
+.dropView {
+	padding: 15px;
+	width: 100%;
+	text-align: left;
+	background-color: #eee;
+	border: none;
+	transition: 0.4s;
+}
+
+.panel {
+	padding: 15px 18px;
+	/*display: none;*/
+	overflow: hidden;
+}
+
+.vl {
+	border-left: 1px solid grey;
+	height: 100%;
+}
+
+/* */
+.active, .dropView:hover {
+	background-color: #ccc;
+}
+
+/* For coverage stats */
+#visibleStatsFalse {
+	display: none;
+}
+</style>
+
+
+</head>
+<body>
+
+
+	<div
+		class="container-fluid p-5 bg-light bg-gradient text-dark text-center rounded">
+		<h1 class="display-3">Coverage Page</h1>
+	</div>
+
+	<div class="container my-5 py-3">
+		<button class="dropView dropdown-toggle mt-2"
+			data-bs-toggle="collapse" data-bs-target="#inputF">Input
+			file</button>
+		<div id="inputF" class="collapse my-3">
+			<code class="text-dark"> $inputFile </code>
+		</div>
+
+		<button class="dropView dropdown-toggle mt-2"
+			data-bs-toggle="collapse" data-bs-target="#testF">Test file</button>
+		<div id="testF" class="collapse my-3">
+			<code class="text-dark"> $testFile </code>
+		</div>
+
+		<!--
+	<button class="dropView dropdown-toggle mt-2" data-bs-toggle="collapse" data-bs-target="#outputContent">Output</button>
+	<div id="outputContent" class="collapse my-3">
+	<code class="text-dark"> $outputContent </code>
+	</div>
+	-->
+
+		<button class="dropView dropdown-toggle mt-2"
+			data-bs-toggle="collapse" data-bs-target="#coverage">Coverage</button>
+		<div id="coverage" class="collapse my-3">
+
+			$alertTags
+
+
+			<div>
+				<nav>
+					<div class="nav nav-tabs" id="nav-tab" role="tablist"
+						style="border-width: 3px;">
+						<button class="nav-link active" id="nav-home-tab"
+							style="color: black; border-width: 3px;" data-bs-toggle="tab"
+							data-bs-target="#nav-home" type="button" role="tab"
+							aria-controls="nav-home" aria-selected="true">Combined
+							Coverage</button>
+						<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+							style="color: black; border-width: 3px;"
+							data-bs-target="#nav-profile" type="button" role="tab"
+							aria-controls="nav-profile" aria-selected="false">Statement
+							Coverage</button>
+						<button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
+							style="color: black; border-width: 3px;"
+							data-bs-target="#nav-contact" type="button" role="tab"
+							aria-controls="nav-contact" aria-selected="false">Decision
+							Coverage</button>
+					</div>
+				</nav>
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active"
+						style="background-color: transparent;" id="nav-home"
+						role="tabpanel" aria-labelledby="nav-home-tab">
+						<table class="w-100">
+							<code class="text-dark"> $coverage </code>
+						</table>
+					</div>
+
+					<div class="tab-pane fade" style="background-color: transparent;"
+						id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+						<table class="w-100">
+							<code class="text-dark"> $statementCovContent </code>
+						</table>
+					</div>
+
+					<div class="tab-pane fade" style="background-color: transparent;"
+						id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+						<table class="w-100">
+							<code class="text-dark"> $decisionCovContent </code>
+						</table>
+					</div>
+				</div>
+
+			</div>
+
+			<div></div>
+
+
+			<br />
+
+			<!-- BELOW IS DATA-FLOW COVERAGE -->
+			<div id="$statsVisibility">
+				<nav>
+					<div class="nav nav-tabs" id="nav-tab" role="tablist"
+						style="border-width: 3px;">
+						<button class="nav-link active" id="nav-combined-tab"
+							data-bs-toggle="tab" style="color: black; border-width: 3px;"
+							data-bs-target="#nav-combined" type="button" role="tab"
+							aria-controls="nav-combined" aria-selected="true">
+							Combined Data-Flow Coverage</button>
+						<button class="nav-link" id="nav-pu-tab" data-bs-toggle="tab"
+							style="color: black; border-width: 3px;" data-bs-target="#nav-pu"
+							type="button" role="tab" aria-controls="nav-pu"
+							aria-selected="true">P-Uses</button>
+						<button class="nav-link" id="nav-cu-tab" data-bs-toggle="tab"
+							style="color: black; border-width: 3px;" data-bs-target="#nav-cu"
+							type="button" role="tab" aria-controls="nav-cu"
+							aria-selected="false">C-Uses</button>
+						<button class="nav-link" id="nav-allpsomec-tab"
+							data-bs-toggle="tab" style="color: black; border-width: 3px;"
+							data-bs-target="#nav-allpsomec" type="button" role="tab"
+							aria-controls="nav-allpsomec" aria-selected="false">
+							All-P/Some-C</button>
+						<button class="nav-link" id="nav-allcsomep-tab"
+							data-bs-toggle="tab" style="color: black; border-width: 3px;"
+							data-bs-target="#nav-allcsomep" type="button" role="tab"
+							aria-controls="nav-allcsomep" aria-selected="false">
+							All-C/Some-P</button>
+						<button class="nav-link" id="nav-alldef-tab" data-bs-toggle="tab"
+							style="color: black; border-width: 3px;"
+							data-bs-target="#nav-alldef" type="button" role="tab"
+							aria-controls="nav-alldef" aria-selected="false">
+							All-Def</button>
+						<button class="nav-link" id="nav-alluse-tab" data-bs-toggle="tab"
+							style="color: black; border-width: 3px;"
+							data-bs-target="#nav-alluse" type="button" role="tab"
+							aria-controls="nav-alluse" aria-selected="false">
+							All-Use</button>
+					</div>
+				</nav>
+				<div class="tab-content" id="nav-tabContent">
+
+					<div class="tab-pane fade show active"
+						style="background-color: transparent;" id="nav-combined"
+						role="tabpanel" aria-labelledby="nav-combined-tab">
+
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Data-Flow Coverage</th>
+									<th scope="col">Association</th>
+									<th scope="col">Variable Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>P-Use</td>
+									<td>$pUseAssociations</td>
+									<td>$pUseVars</td>
+								</tr>
+								<tr>
+									<td>C-Use</td>
+									<td>$cUseAssociations</td>
+									<td>$cUseVars</td>
+								</tr>
+								<tr>
+									<td>All-P-Uses/Some-C-Uses</td>
+									<td>$allPSomeCUses</td>
+									<td>$allPSomeCVars</td>
+								</tr>
+								<tr>
+									<td>All-C-Uses/Some-P-Uses</td>
+									<td>$allCSomePUses</td>
+									<td>$allCSomePVars</td>
+								</tr>
+								<tr>
+									<td>All-Def-Uses</td>
+									<td>$allDefUses</td>
+									<td>$allDefVars</td>
+								</tr>
+								<tr>
+									<td>All-Uses</td>
+									<td>$allUses</td>
+									<td>$allUseVars</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+					<div class="tab-pane fade" style="background-color: transparent;"
+						id="nav-pu" role="tabpanel" aria-labelledby="nav-pu-tab">
+
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Data-Flow Coverage</th>
+									<th scope="col">Association</th>
+									<th scope="col">Variable Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>P-Use</td>
+									<td>$pUseAssociations</td>
+									<td>$pUseVars</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+					<div class="tab-pane fade" style="background-color: transparent;"
+						id="nav-cu" role="tabpanel" aria-labelledby="nav-cu-tab">
+
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Data-Flow Coverage</th>
+									<th scope="col">Association</th>
+									<th scope="col">Variable Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>C-Use</td>
+									<td>$cUseAssociations</td>
+									<td>$cUseVars</td>
+								</tr>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+					<div class="tab-pane fade" style="background-color: transparent;"
+						id="nav-allpsomec" role="tabpanel"
+						aria-labelledby="nav-allpsomec-tab">
+
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Data-Flow Coverage</th>
+									<th scope="col">Association</th>
+									<th scope="col">Variable Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>All-P-Uses/Some-C-Uses</td>
+									<td>$allPSomeCUses</td>
+									<td>$allPSomeCVars</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+					<div class="tab-pane fade" style="background-color: transparent;"
+						id="nav-allcsomep" role="tabpanel"
+						aria-labelledby="nav-allcsomep-tab">
+
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Data-Flow Coverage</th>
+									<th scope="col">Association</th>
+									<th scope="col">Variable Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>All-C-Uses/Some-P-Uses</td>
+									<td>$allCSomePUses</td>
+									<td>$allCSomePVars</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+					<div class="tab-pane fade" style="background-color: transparent;"
+						id="nav-alldef" role="tabpanel" aria-labelledby="nav-alldef-tab">
+
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Data-Flow Coverage</th>
+									<th scope="col">Association</th>
+									<th scope="col">Variable Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>All-Def-Uses</td>
+									<td>$allDefUses</td>
+									<td>$allDefVars</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+					<div class="tab-pane fade" style="background-color: transparent;"
+						id="nav-alluse" role="tabpanel" aria-labelledby="nav-alluse-tab">
+
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Data-Flow Coverage</th>
+									<th scope="col">Association</th>
+									<th scope="col">Variable Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>All-Uses</td>
+									<td>$allUses</td>
+									<td>$allUseVars</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+
+
+
+		<div id="$statsVisibility" class="mt-2">
+			<button class="dropView dropdown-toggle" data-bs-toggle="collapse"
+				data-bs-target="#coverageStats">Stats</button>
+			<div id="coverageStats" class="collapse my-3">
+
+
+
+				<p>Number of Missed Statements: $missedStatements</p>
+				<p>Number of Total Statements: $totalStatements</p>
+				<strong> Overall Statement Coverage: </strong>
+				<div class="progress" style="height: 25px; width: 50%;">
+					<div class="progress-bar $covStateBGColor"
+						style="width: $covStatePercent%">$covStatePercent%</div>
+				</div>
+
+				<hr class="bg-danger border-2 border-top border-danger">
+
+				<p>Number of Missed Branches: $missedBranches</p>
+				<p>Number of Total Branches: $totalBranches</p>
+				<strong> Overall Branch (Decision) Coverage: </strong>
+				<div class="progress" style="height: 25px; width: 50%;">
+					<div class="progress-bar $covDecisionBGColor"
+						style="width: $covDecisionPercent%">$covDecisionPercent%</div>
+				</div>
+				<p>
+					<strong> Note: </strong> missed branches can be identified by
+					looking for <span style="background-color: yellow">&#9432;</span>
+					under coverage! Hover over the lines to see more details.
+				</p>
+
+				<hr class="bg-danger border-2 border-top border-danger">
+
+				<p>
+					<strong>Data-Flow Coverage Stats:</strong>
+				</p>
+				<p>Number of Predicate-Uses: $pCount</p>
+				<p>Number of Computation-Uses: $cCount</p>
+				<p>Number of All-Predicate-Uses / Some-Computation-Uses:
+					$allPsomeCCount</p>
+				<p>Number of All-Computation-Uses / Some-Predicate-Uses:
+					$allCsomePCount</p>
+				<p>Number of All-Definition-Uses: $allDefCount</p>
+				<p>Number of All-Uses: $allUseCount</p>
+
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		// Initialize tooltips
+		var tooltipTriggerList = [].slice.call(document
+				.querySelectorAll('[data-bs-toggle="tooltip"]'))
+		var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+			return new bootstrap.Tooltip(tooltipTriggerEl)
+		})
+	</script>
+
+</body>
+</html>

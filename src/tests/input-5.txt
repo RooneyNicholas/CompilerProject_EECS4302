@@ -1,0 +1,39 @@
+--if/else-if/else, chained
+void main() {
+    int32 a = 5
+    int32 b
+    int32 c = 7
+    if (a < 5) {
+        b = 1 --skip
+    } else if (a < 6 && c == 7) {
+        b = 10 --execute
+    } else if (a < 3) {
+        b = 5 --skip
+    } else {
+        b = 6 --skip
+    }
+    bool test = true
+
+    if (a == 5 && test) {
+        b = 7 --execute
+    } else {
+        b = 8 --skip
+    }
+
+    if (a < 1) {
+        b = 9 --skip
+    } else {
+        b = 10 --execute
+    }
+    
+    print(someFunction(5))
+    someFunction(4)
+}
+
+bool someFunction(int32 sample){
+	if (sample < 5){
+		return false
+	}else{
+		return true
+	}
+}

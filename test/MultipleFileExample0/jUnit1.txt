@@ -1,0 +1,15 @@
+@Test t1(){
+	int32 first = 7
+	double second = 20.0
+	double third = multiply(first, second)
+}
+
+@Test t2(){
+	int32 first = 7 * 24
+	double third = multiply(first, 5.0)
+}
+
+@Test t3(){
+	int32 first = 1 + 4 * 5
+	double third = multiply(first, 1.0)
+}

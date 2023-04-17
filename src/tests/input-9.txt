@@ -1,0 +1,7 @@
+--array assignment and access, from left and right side
+void main() {
+   int32 a = 4
+   int32[5] b = {1, 2, 3, 4, 5}
+   b[a] = 12345
+   a = b[a]
+}

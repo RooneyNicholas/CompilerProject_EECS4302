@@ -1,0 +1,33 @@
+@charset "ISO-8859-1";
+
+.notCovered {
+	padding: 5px;
+	background-color: red;
+}
+
+.covered {
+	padding: 5px;
+	background-color: lime;
+	
+}
+
+.dropView {
+  
+  padding: 15px;
+  width: 100%;
+  text-align: left;
+  background-color: #eee;
+  border: none;
+  transition: 0.4s;
+}
+
+.panel {
+  padding: 15px 18px;
+  /*display: none;*/
+  overflow: hidden;
+}
+
+/* */
+.active, .dropView:hover {
+  background-color: #ccc;
+}

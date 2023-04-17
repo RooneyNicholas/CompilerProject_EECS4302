@@ -1,0 +1,8 @@
+--bitwise operations
+void main(){
+	int32 first = 9 --1001
+	int32 second = 7 --111
+	int32 bitAnd = first & second --0001=1
+	int32 bitOr = first | second --1111=15
+	int32 bitXor = first ^ second --1110=14
+}

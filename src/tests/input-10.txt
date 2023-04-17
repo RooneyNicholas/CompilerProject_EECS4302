@@ -1,0 +1,9 @@
+--uninitialized array, zeroed and values set with a while loop
+void main() {
+    int32[5] a
+    int32 i = 0
+    while(i < 5) {
+        a[i] = i
+        i = i + 1
+    }
+}

@@ -1,0 +1,38 @@
+--relational and logical expressions
+void main(){
+	bool t = true
+	bool f = false
+	bool tandt = t && t --true
+	print(tandt)
+	bool tandf = t && f --false
+	print(tandf)
+	bool fandt = f && t --false
+	print(fandt)
+	bool fandf = f && f --true
+	print(fandf)
+	bool tort = t || t --true
+	print(tort)
+	bool torf = t || f --true
+	print(torf)
+	bool fort = f || t --true
+	print(fort)
+	bool forf = f || f --false
+	print(forf)
+	
+	bool gtf = 5 > 7 --false
+	print(gtf)
+	bool gtt = 7 > 5 --true
+	print(gtt)
+	bool ltf = 7 < 5 --false
+	print(ltf)
+	bool ltt = 5 < 7 --true
+	print(ltt)
+	bool gtef = 5.0 >= 7 --false
+	print(gtef)
+	bool gtet = 7.0 >= 7 --true
+	print(gtet)
+	bool ltef = 7.0 <= 5 --false
+	print(ltef)
+	bool ltet = 7.0 <= 7 --true
+	print(ltet)
+}

@@ -1,0 +1,7 @@
+--variable declaration, reference, assignment
+void main(){
+	int32 first
+	first = 7
+	int32 second = first + 20
+	first = second + 30
+}
