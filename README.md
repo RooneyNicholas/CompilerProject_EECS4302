@@ -1,9 +1,9 @@
 # EECS4302_Project
-Team Credit:
-Brynn Perit
-Yuval Rif
-Krishaanth Manoharan
-Nicholas Rooney
+Team Credit:<br />
+Brynn Perit<br />
+Yuval Rif<br />
+Krishaanth Manoharan<br />
+Nicholas Rooney<br />
 
 This is a compiler created in ANTLR4 as the final project in EECS4302.
 
